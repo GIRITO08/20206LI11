@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block encabezado %}
+<a href="{% url 'escuelas_alta' %}"><img src="{%static 'images/plus.png'%}" alt=""></a>
+{% endblock %}
+{% block principal %}
+  <table class="w3-table-all w3-hoverable">
+    <thead>
+      <tr class="w3-dark-grey">
+        <th>acciones</th>
+        <th>nombre</th>
+        <th>Escuela</th>
+        <th>Sexo</th>
+        <th>Fecha de nacimiento</th>
+      </tr>
+    </thead>
+    {% for maestro in maestros %}
+    <tr>
+        <td><a href="{% url 'escuelas_editar' maestro.id %}"><img src="{%static 'images/edit.png'%}" alt=""></a>
+        <a href="{% url 'escuelas_eliminar' maestro.id %}"><img src="{%static 'images/basura.png'%}" alt=""></a></td>
+        <td>{{ maestro.nombre }}</td>
+        <td>{{ maestro.escuela.siglas }}</td>
+        <td>{{ maestro.Sexo}}</td>
+        <td>{{ maestro.fecha_nacimiento }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
