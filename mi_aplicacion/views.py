@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 
 from django.views import View
 
-from mi_aplicacion.models import Escuela
+from mi_aplicacion.models import Escuela, Maestro
 
-from mi_aplicacion.forms import EscuelaForm
+from mi_aplicacion.forms import EscuelaForm, MaestroForm
 
 class home(View):
     def get(self , request):
@@ -82,11 +82,21 @@ class EscuelaEliminar(View):
         
 class Maestros(View):
     def get(self , request):
-        maestros = Maestros.objects.all()
+        maestros = Maestro.objects.all()
         cdx={
             "titulo":"Maestro",
             "subtitulo":"Lista de maestros",
             "maestros":maestros
             }
         return render(request , "maestros/maestros.html", cdx)
+
+class MaestroAlta(View):
+    def get(self , request ):
+        form = MaestroForm()
+        cdx={
+        "titulo":"Escuela",
+        "subtitulo":"Alta Maestro",
+        "form":form
+        }
+        return render(request , 'maestros/CRUD.html', cdx)
 # Create your views here.
